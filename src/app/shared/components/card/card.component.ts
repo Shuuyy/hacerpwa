@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ImageProductService } from '../../services/imageProduct/image-product.service';
 
 @Component({
@@ -9,18 +9,24 @@ import { ImageProductService } from '../../services/imageProduct/image-product.s
 export class CardComponent implements OnInit {
 
   constructor(private imageService:ImageProductService) { }
-
+  @Input() title="";
+  @Input() img="";
+  @Input() desc="";
+  urlImg = ""
+  @Output() events = new EventEmitter; 
+  @Output() eventsEdit = new EventEmitter; 
   ngOnInit(): void {
-this.getdata();
 
   }
 
-  async getdata(){
-  (await this.imageService.getImages()).subscribe({
-    next:(res)=>{
-      console.log(res);
-    }
-  })
+  delete(event:any){
+    this.events.emit(event)
+
   }
+
+  edit(event:any){
+    this.eventsEdit.emit(event)
+  }
+  
 
 }

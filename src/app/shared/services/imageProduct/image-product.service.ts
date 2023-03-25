@@ -5,15 +5,26 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ImageProductService {
-   httpOptions = {
-    headers: new HttpHeaders({
-      'JsonOdds-API-Key':'yourapikey'
-    })
-  };
+   
   constructor(private http:HttpClient) { }
 
   public async getImages(){
-    const url = 'https://test.evundile.com.mx/api/products/18';
-    return await this.http.get(url,this.httpOptions);
+    const url = '/api/products/?display=full&ws_key=9QMR8FP6SFCICN2RN5U4ZNM16M5HQ4AR';
+    return await this.http.get(url);
+  }
+
+  public async delete(id:number){
+    const url ='/api/products/'+id+'/?display=full&ws_key=9QMR8FP6SFCICN2RN5U4ZNM16M5HQ4AR'
+    return await this.http.delete(url);
+  }
+  public async save(form:any){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/xml' });
+    const url ='/api/products/?ws_key=9QMR8FP6SFCICN2RN5U4ZNM16M5HQ4AR'
+    return await this.http.post(url,form,{headers});
+  }
+  public async edit(xml:any,id:number){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/xml' });
+    const url ='/api/products/'+id+'?ws_key=9QMR8FP6SFCICN2RN5U4ZNM16M5HQ4AR'
+    return await this.http.put(url,xml,{headers});
   }
 }

@@ -63,9 +63,14 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "hacerpwa:build",
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "hacerpwa:build:production"
+              
             },
             "development": {
               "browserTarget": "hacerpwa:build:development"
@@ -77,6 +82,7 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "hacerpwa:build"
+           
           }
         },
         "test": {
